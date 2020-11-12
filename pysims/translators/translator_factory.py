@@ -15,6 +15,10 @@ import apsim79.psims2met
 import apsim79.jsons2apsim
 import apsim79.out2psims
 
+import apsim710.psims2met
+import apsim710.jsons2apsim
+import apsim710.out2psims
+
 import dssat45.jsons2dssat
 import dssat45.out2psims
 import dssat45.psims2wth
@@ -47,6 +51,9 @@ class TranslatorFactory(object):
             'apsim79.psims2met'      : apsim79.psims2met.Psims2Met,
             'apsim79.jsons2apsim'    : apsim79.jsons2apsim.Jsons2Apsim,
             'apsim79.out2psims'      : apsim79.out2psims.Out2Psims,
+            'apsim710.psims2met'      : apsim710.psims2met.Psims2Met,
+            'apsim710.jsons2apsim'    : apsim710.jsons2apsim.Jsons2Apsim,
+            'apsim710.out2psims'      : apsim710.out2psims.Out2Psims,
             'camp2json'              : common.camp2json.Camp2Json,
             'dssat45.jsons2dssat'    : dssat45.jsons2dssat.Jsons2Dssat,
             'dssat45.jsons2dssatlong': dssat45.jsons2dssatlong.Jsons2DssatLong,

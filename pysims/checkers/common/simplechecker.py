@@ -61,7 +61,7 @@ class SimpleChecker(checker.Checker):
 
             # check simgrid file
             nco = Nco()
-            options = '-h -d lat,%f,%f -d lon,%f,%f' % (minlat, maxlat, minlon, maxlon)
+            options = ['-h -d lat,%f,%f -d lon,%f,%f' % (minlat, maxlat, minlon, maxlon)]
             tmpfile = "checker.tmp.nc4"
             nco.ncks(input=simgfile, output=tmpfile, options=options)
 
@@ -119,7 +119,7 @@ class SimpleChecker(checker.Checker):
 
         # select first time
         nco = Nco()
-        options = '-h -d time,0 -d lat,%f,%f -d lon,%f,%f' % (minlat, maxlat, minlon, maxlon)
+        options = ['-h -d time,0 -d lat,%f,%f -d lon,%f,%f' % (minlat, maxlat, minlon, maxlon)]
         tmpfile = "checker.wth.nc4"
         nco.ncks(input=filename, output=tmpfile, options=options)
 
@@ -151,7 +151,7 @@ class SimpleChecker(checker.Checker):
         minlat, maxlat, minlon, maxlon = self.__get_range(latidx, lonidx, latdelta, londelta, glatdelta, glondelta)
 
         nco = Nco()
-        options = '-h -d lat,%f,%f -d lon,%f,%f' % (minlat, maxlat, minlon, maxlon)
+        options = ['-h -d lat,%f,%f -d lon,%f,%f' % (minlat, maxlat, minlon, maxlon)]
         tmpfile = "checker.soil.nc4"
         nco.ncks(input=filename, output=tmpfile, options=options)
 

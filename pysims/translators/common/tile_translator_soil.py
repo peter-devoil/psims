@@ -58,22 +58,22 @@ class SoilTileTranslator(translator.Translator):
                 maxlon = minlon + londelta
 
                 # additional options
-                options = '-h -a lat,lon -d lat,%f,%f -d lon,%f,%f --rd' % (minlat, maxlat, minlon, maxlon)
+                options = ['-h -a lat,lon -d lat,%f,%f -d lon,%f,%f --rd' % (minlat, maxlat, minlon, maxlon)]
                 if 'cropland' in variables:
-                    options += ' -w cropland'
+                    options.append(' -w cropland')
 
                 # perform aggregation
                 nco.ncwa(input = inputfile, output = outputfile, options = options);
 
                 # add degenerate profile dimension
-                nco.ncecat(input = outputfile, output = outputfile, options = '-O -h -u profile')
-                nco.ncap2(input = outputfile, output = outputfile, options = '-O -h -s profile[profile]=1')
+                nco.ncecat(input = outputfile, output = outputfile, options = ['-O -h -u profile'])
+                nco.ncap2(input = outputfile, output = outputfile, options = ['-O -h -s profile[profile]=1'])
 
                 # add soil_id variable
-                nco.ncap2(input = outputfile, output = outputfile, options = '-O -h -s soil_id[profile,lat,lon]=1')
-                nco.ncatted(input = outputfile, output = outputfile, options = '-O -h -a units,soil_id,c,c,"mapping"')
-                nco.ncatted(input = outputfile, output = outputfile, options = '-O -h -a long_name,soil_id,c,c,"%s"' % str(soil_id))
-                nco.ncatted(input = outputfile, output = outputfile, options = '-O -h -a soil_id,global,d,c,""')
+                nco.ncap2(input = outputfile, output = outputfile, options = ['-O -h -s soil_id[profile,lat,lon]=1'])
+                nco.ncatted(input = outputfile, output = outputfile, options = ['-O -h -a units,soil_id,c,c,"mapping"'])
+                nco.ncatted(input = outputfile, output = outputfile, options = ['-O -h -a long_name,soil_id,c,c,"%s"' % str(soil_id)])
+                nco.ncatted(input = outputfile, output = outputfile, options = ['-O -h -a soil_id,global,d,c,""'])
 
                 # change latitude, longitude to simulated point
                 with nc(outputfile, 'a') as f:

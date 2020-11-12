@@ -107,22 +107,22 @@ class TileTranslator(translator.Translator):
                         varnames[j] = str(','.join(varkeys[idx]))
 
                 # basic options
-                options = '-h -a lat,lon -d lat,%f,%f -d lon,%f,%f --rd' % (minlat, maxlat, minlon, maxlon)
+                options = ['-h -a lat,lon -d lat,%f,%f -d lon,%f,%f --rd' % (minlat, maxlat, minlon, maxlon)]
 
                 # select time
                 if slicefirst and not i and (tidx0 != 0 or tidx1 != len(time) - 1):
-                    options += ' -d time,%d,%d' % (tidx0, tidx1)
+                    options.append(' -d time,%d,%d' % (tidx0, tidx1) )
 
                 # select variables
                 if variables:
-                    options += ' -v %s' % ','.join(varnames)
+                    options.append(' -v %s' % ','.join(varnames))
 
                 # average over space
                 if logical_and(lats >= minlat, lats <= maxlat).sum() > 1 or logical_and(lons >= minlon, lons <= maxlon).sum() > 1:
-                    options += ' -w cropland'
+                    options.append(' -w cropland')
 
                 # average over latitude, longitude
-                nco.ncwa(input = inputfile, output = outputfile, options = options);
+                nco.ncwa(input = inputfile, output = outputfile, options = options)
 
                 # change latitude, longitude to simulated point
                 with nc(outputfile, 'a') as f:
